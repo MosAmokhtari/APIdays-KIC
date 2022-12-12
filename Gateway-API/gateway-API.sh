@@ -6,7 +6,7 @@
 ##################
 
 GW_API_DIR=$PWD
-DEMO_MAGIC=$GW_API_DIR/demo-magic
+DEMO_MAGIC=$GW_API_DIR/magic
 LOG_SCRIPT=$GW_API_DIR/script.log
 KIC_VERSION=2.7.0
 K8S_GW_API_VERSION=v0.5.1
