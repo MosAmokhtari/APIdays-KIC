@@ -1,0 +1,125 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: get-method
+route:
+  methods:
+    - get
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: add-cors-g0
+plugin: cors
+config:
+  origins:
+    - "*"
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: add-mocking-g1
+plugin: mocking
+config:
+  api_specification_filename: stock.yaml
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: add-key-auth-g2
+plugin: key-auth
+config:
+  key_names:
+    - api_key
+    - apikey
+  key_in_body: false
+  hide_credentials: true
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: add-request-validator-m3
+plugin: request-validator
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: market-stock-api-0
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/plugins: add-cors-g0, add-mocking-g1, add-key-auth-g2
+spec:
+  rules:
+    - host: httpbin.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: market-stock-api-service-0
+                port:
+                  number: 80
+            path: /anything/market/stock/historical
+            pathType: ImplementationSpecific
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: market-stock-api-1
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/plugins: add-request-validator-m3, add-cors-g0, add-mocking-g1, add-key-auth-g2
+    konghq.com/override: get-method
+spec:
+  rules:
+    - host: httpbin.org
+      http:
+        paths:
+          - backend:
+              service:
+                name: market-stock-api-service-0
+                port:
+                  number: 80
+            path: /anything/market/stock/closing/.*
+            pathType: ImplementationSpecific
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: market-stock-api-2
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/plugins: add-cors-g0, add-mocking-g1, add-key-auth-g2
+spec:
+  rules:
+    - host: httpbin.backends
+      http:
+        paths:
+          - backend:
+              service:
+                name: market-stock-api-service-1
+                port:
+                  number: 80
+            path: /anything/market/stock/historical
+            pathType: ImplementationSpecific
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: market-stock-api-3
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/plugins: add-request-validator-m3, add-cors-g0, add-mocking-g1, add-key-auth-g2
+    konghq.com/override: get-method
+spec:
+  rules:
+    - host: httpbin.backends
+      http:
+        paths:
+          - backend:
+              service:
+                name: market-stock-api-service-1
+                port:
+                  number: 80
+            path: /anything/market/stock/closing/.*
+            pathType: ImplementationSpecific
+
