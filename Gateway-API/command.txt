@@ -1,0 +1,14 @@
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/standard-install.yaml
+kubectl apply -f https://docs.konghq.com/assets/kubernetes-ingress-controller/examples/echo-service.yaml
+
+kubectl apply -f ./kubernetes/GatewayClass.yaml
+kubectl apply -f ./kubernetes/Gateway.yaml
+
+
+
+
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v0.5.1/experimental-install.yaml
+kubectl apply -f ./kubernetes/echo-service
+kubectl apply -f ./kubernetes/GatewayClass.yaml
+kubectl apply -f ./kubernetes/Gateway.yaml
+kubectl apply -f ./kubernetes/HTTProute.yaml

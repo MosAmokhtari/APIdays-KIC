@@ -1,15 +1,15 @@
-apiVersion: gateway.networking.k8s.io/v1alpha2
+apiVersion: gateway.networking.k8s.io/v1beta1
 kind: Gateway
 metadata:
-  annotations:
-    konghq.com/gateway-unmanaged: kong/kong-proxy
   name: kong
 spec:
   gatewayClassName: kong
   listeners:
   - name: proxy
     port: 80
+    hostname: kong-proxy.kong
     protocol: HTTP
   - name: proxy-ssl
     port: 443
+    hostname: kong-proxy.kong
     protocol: HTTPS
