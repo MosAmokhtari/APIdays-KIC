@@ -1,6 +1,0 @@
-This is the beginning of the demo, fasten your seatbelt
-K3d install- First we create a K3s cluster to deploy 
-  our application and Kuma to illustrate the mesh's capabilities in Kubernetes mode. /n
-K3d install: let's check if the system pods are ready 
-
-type control+c to exit command and continue
