@@ -1642,6 +1642,8 @@ spec:
           value: "true"
         - name: CONTROLLER_PUBLISH_SERVICE
           value: kong/kong-proxy
+        - name: CONTROLLER_FEATURE_GATES
+          value: GatewayAlpha=true
         - name: POD_NAME
           valueFrom:
             fieldRef:
