@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: kong-enterprise-license
-stringData:
-  license: '{ "license": { "version": 1, "signature": "11ef8ace477967be040af63955ed7b5a6648691df4b4635742bc959b1e4e56ae2c26a00a0effccaa6b86e72445f9e7c123c0eaba6e4e8d71aa736bb143f50103", "payload": { "customer": "Demo", "license_creation_date": "2022-02-21", "product_subscription": "Kong Enterprise Subscription", "support_plan": "Platinum", "admin_seats": "1", "dataplanes": "10", "license_expiration_date": "2022-12-31", "license_key": "0011K0000280K8FQAU_a1V1K0000084FcDUAU" } } }'
