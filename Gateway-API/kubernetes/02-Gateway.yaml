@@ -7,9 +7,9 @@ spec:
   listeners:
   - name: proxy
     port: 80
-    hostname: kong-proxy.kong
+    hostname: kong.example
     protocol: HTTP
   - name: proxy-ssl
     port: 443
-    hostname: kong-proxy.kong
+    hostname: kong.example
     protocol: HTTPS
